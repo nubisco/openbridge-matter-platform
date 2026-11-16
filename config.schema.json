@@ -1,0 +1,26 @@
+{
+  "pluginAlias": "MatterPlatform",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "Reads Matter devices that are already in Apple Home (or another Matter ecosystem) by joining them as a second controller. They stay where they are and are not added to HomeKit again. To add one, turn on pairing mode for it in the Home app, add the code here, save, and restart OpenBridge.",
+  "footerDisplay": "Read only. Supported: lights, plugs, switches, temperature, humidity, light, contact, motion and leak sensors, blinds and thermostats. See https://docs.nubisco.io/openbridge-matter-platform/pairing",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "pairingCodes": {
+        "title": "Pairing codes",
+        "type": "array",
+        "items": { "type": "string", "title": "Setup code" },
+        "description": "The 11-digit setup code the Home app shows after Accessory Settings, Turn On Pairing Mode. A code works for about 15 minutes, so restart OpenBridge after adding it. Each code is used once."
+      },
+      "refreshSeconds": {
+        "title": "Refresh (seconds)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 10,
+        "maximum": 3600,
+        "description": "How often each connected device's state is reported again, even when nothing changed. Devices push their changes as they happen either way."
+      }
+    }
+  }
+}
