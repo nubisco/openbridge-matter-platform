@@ -11,7 +11,7 @@
  * Reading only, for now: the device keeps being controlled from Apple Home.
  */
 import { createHash } from 'node:crypto'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
   ChangeNotificationService,
@@ -78,7 +78,9 @@ export class MatterBridge {
     private readonly host: Host,
     private readonly opts: ControllerOptions,
   ) {
-    mkdirSync(opts.dataDir, { recursive: true })
+    // The fabric's private keys live here: owner only, also when it already existed.
+    mkdirSync(opts.dataDir, { recursive: true, mode: 0o700 })
+    chmodSync(opts.dataDir, 0o700)
     this.statePath = join(opts.dataDir, 'openbridge-state.json')
   }
 
@@ -92,7 +94,7 @@ export class MatterBridge {
   }
 
   private writeState(s: State): void {
-    writeFileSync(this.statePath, JSON.stringify(s, null, 2))
+    writeFileSync(this.statePath, JSON.stringify(s, null, 2), { mode: 0o600 })
   }
 
   async start(): Promise<void> {
