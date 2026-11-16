@@ -1,12 +1,12 @@
 {
   "name": "@nubisco/openbridge-matter-platform",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "OpenBridge plugin that reads Matter devices already in Apple Home (or any Matter ecosystem) by joining them as a second controller, locally, without showing them twice in HomeKit",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nubisco/openbridge-matter-platform.git"
   },
-  "author": "Jos\u00e9 Silva <jose@nubisco.io>",
+  "author": "José Silva <jose@nubisco.io>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
